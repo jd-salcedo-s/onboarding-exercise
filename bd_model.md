@@ -30,6 +30,7 @@
 # reservation 
 - id
 - client_id (FK)
+- staff_id (FK)
 - start_date
 - expiry_date
 - reservation_status
@@ -80,6 +81,7 @@ erDiagram
     reservation {
         int id PK
         int client_id FK
+        int staff_id FK
         date start_date
         date expiry_date
         reservation_status reservation_status
@@ -91,6 +93,7 @@ erDiagram
     genre ||--o{ book : contains
     author ||--o{ book : writes
     client ||--|| reservation : makes
+    staff ||--|| reservation : supervises
     reservation ||--|{ reservation_book : contains
     book ||--o{ reservation_book : included_in
  
