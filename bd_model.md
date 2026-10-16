@@ -92,8 +92,8 @@ erDiagram
     }
     genre ||--o{ book : contains
     author ||--o{ book : writes
-    client ||--|| reservation : makes
-    staff ||--|| reservation : supervises
+    client ||--o{reservation : makes
+    staff ||--o{reservation : supervises
     reservation ||--|{ reservation_book : contains
     book ||--o{ reservation_book : included_in
  
