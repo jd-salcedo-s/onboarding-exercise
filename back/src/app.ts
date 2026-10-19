@@ -6,6 +6,7 @@ import { staffRouter } from './modules/staff/staff.routes.ts'
 import { bookRouter } from './modules/book/book.routes.ts'
 import { reservationRouter } from './modules/reservation/reservation.routes.ts'
 import { clientRouter } from './modules/client/client.routes.ts'
+import './models/index.ts'
 
 const app = express()
 app.use(express.json())

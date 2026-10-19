@@ -1,0 +1,132 @@
+@baseUrl = http://localhost:3000
+
+### RESERVATIONS
+GET {{baseUrl}}/reservations
+### By id
+GET {{baseUrl}}/reservations/1
+### create
+POST {{baseUrl}}/reservations
+Content-Type: application/json
+
+{
+    "client_id": 1,
+    "staff_id": 1
+}
+### update
+PATCH {{baseUrl}}/reservations/1
+Content-Type: application/json
+
+{
+    "reservation_status": "completed"
+}
+
+
+### AUTHOR
+GET {{baseUrl}}/author
+### By id
+GET {{baseUrl}}/author/1
+### create
+POST {{baseUrl}}/author
+Content-Type: application/json
+
+{
+    "name": "Gabriel Garcia"
+}
+### update
+PATCH {{baseUrl}}/author/1
+Content-Type: application/json
+
+{
+    "name": "Gabriel Garcia Marquez"
+}
+
+### BOOK
+GET {{baseUrl}}/book
+### By id
+GET {{baseUrl}}/book/1
+### create
+POST {{baseUrl}}/book
+Content-Type: application/json
+
+{
+    "author_id": 1,
+    "genre_id": 1,
+    "title": "Libro x",
+    "publish_date": "2020-10-22"
+}
+### update
+PATCH {{baseUrl}}/book/4
+Content-Type: application/json
+
+{
+    "author_id": 1,
+    "genre_id": 1,
+    "title": "Libro x",
+    "publish_date": "2020-10-22",
+    "is_booked": "true"
+}
+
+### CLIENT
+GET {{baseUrl}}/client
+### By id
+GET {{baseUrl}}/client/1
+### create
+POST {{baseUrl}}/client
+Content-Type: application/json
+
+{
+    "name": "Juanito",
+    "phone_number": "3122222222",
+    "email": "jds@correo.co"
+}
+### update
+PATCH {{baseUrl}}/client/1
+Content-Type: application/json
+
+{
+    "name": "Juanito",
+    "phone_number": "3122222222",
+    "email": "jds@correo.co"
+}
+
+### GENRE
+GET {{baseUrl}}/genre
+### By id
+GET {{baseUrl}}/genre/1
+### create
+POST {{baseUrl}}/genre
+Content-Type: application/json
+
+{
+    "description": "Terror"
+}
+### update
+PATCH {{baseUrl}}/genre/1
+Content-Type: application/json
+
+{
+    "description": "Comedia"
+}
+
+### STAFF
+GET {{baseUrl}}/staff
+### By id
+GET {{baseUrl}}/staff/1
+### create
+POST {{baseUrl}}/staff
+Content-Type: application/json
+
+{
+    "name": "Juanita",
+    "username": "juanita.user",
+    "password": "Temp123*"
+}
+### update
+PATCH {{baseUrl}}/staff/1
+Content-Type: application/json
+
+{
+    "name": "Juanito",
+    "username": "juanito.user",
+    "password": "Temp123*"
+}

@@ -9,6 +9,6 @@ export type Reservation = {
     reservation_status: ReservationStatus
 }
 
-export type ReservationCreate = Omit<Reservation, 'id' | 'reservation_status' | 'start_date'>
-export type ReservationUpdate = Partial<Omit<Reservation, 'id' | 'start_date' | 'client_id' | 'staff_id'>>
+export type ReservationCreate = Omit<Reservation, 'id' | 'reservation_status' | 'start_date' | 'expiry_date'>
+export type ReservationUpdate = Partial<Omit<Reservation, 'id' | 'start_date' | 'client_id' | 'staff_id' | 'expiry_date'>>
 

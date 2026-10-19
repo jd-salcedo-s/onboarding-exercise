@@ -14,15 +14,20 @@ export class StaffRepository {
 
     static async create(data: StaffCreate) {
         const created_staff = await Staff.create({
-            name: data.name
+            name: data.name,
+            username: data.username,
+            password: data.password
         })
 
         return created_staff
     }
 
     static async update(id: Number, data: StaffUpdate) {
-        const updated_staff = await Staff.update(
-            { name: data.name }, 
+        const updated_staff = await Staff.update({
+            name: data.name,
+            username: data.username,
+            password: data.password 
+        }, 
             { where: {id} }
         )
 

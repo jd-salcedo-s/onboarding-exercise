@@ -1,5 +1,7 @@
+import Book from "../book/book.model.ts";
 import Reservation from "./reservation.model.ts";
 import type { ReservationCreate, ReservationUpdate } from "./reservation.types.ts";
+import ReservationBook from "./reservation_book.model.ts";
 import { ReservationStateMachine } from "./reservation_state_machine.ts";
 import type { ReservationStatus } from "./reservation_status.ts";
 
@@ -9,21 +11,37 @@ export class ReservationRepository {
     }
 
      static async getById(id: Number) {
-        return await Reservation.findOne({
-            where: {id}
+        console.log("id: ", id)
+
+        console.log("asociaciones: ", Object.keys(Reservation.associations))
+        const reservation = await Reservation.findOne({
+            where: {id},
+            include: [
+                {
+                    association: 'books'
+                }
+            ],
+            logging: console.log
         })
+
+        console.log("Consulta finalizada")
+        return reservation
     }
 
     static async create(data: ReservationCreate) {
-        const reservation_status: ReservationStatus = 'pending'
-        const start_date = new Date().toISOString().split('T')[0] //para obtener el formato de YEAR-MM-DD
+        const reservation_status: ReservationStatus = 'active'
 
+        const start_date = new Date()
+        const expiry_days = 15
+        const expiry_date = new Date(start_date)
+        expiry_date.setDate(expiry_date.getDate() + expiry_days)
+        
         const created_reservation = await Reservation.create({
             client_id: data.client_id,
             staff_id: data.staff_id,
-            expiry_date: data.expiry_date,
+            expiry_date: expiry_date.toISOString().split('T')[0],
             reservation_status,
-            start_date
+            start_date: start_date.toISOString().split('T')[0] //para obtener el formato de YEAR-MM-DD
         })
 
         return created_reservation
@@ -31,13 +49,8 @@ export class ReservationRepository {
 
     static async update(id: Number, data: ReservationUpdate) {
         const update_data: {
-            expiry_date?: Date,
             reservation_status?: ReservationStatus
         } = {}
-
-        if (data.expiry_date !== undefined) {
-            update_data.expiry_date = data.expiry_date
-        }
 
         if (data.reservation_status !== undefined) {
             if (!ReservationStateMachine.isValidStatus(data.reservation_status)) {

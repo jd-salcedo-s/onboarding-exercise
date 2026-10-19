@@ -15,8 +15,10 @@ export class ReservationController {
     static async getById(req: Request, res: Response) {
             const id = Number(req.params.id)
             try {
+                console.log("Antes de llamar al repo")
                 const reservation = await ReservationRepository.getById(id)
-    
+                console.log("despues de llamar al repo")
+
                 return res.json(reservation)
             } catch {
                 return res.status(500)
