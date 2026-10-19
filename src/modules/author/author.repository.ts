@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import Author from "./author.model.ts";
 import type { AuthorCreate, AuthorUpdate } from "./author.types.ts";
 
@@ -22,12 +21,12 @@ export class AuthorRepository {
     }
 
     static async update(id: Number, data: AuthorUpdate) {
-        const updated_author = await Author.update(
+        const updated_author_count = await Author.update(
             { name: data.name }, 
             { where: {id} }
         )
 
-        return updated_author
+        return updated_author_count
     }
 
     static async delete(id: Number) {

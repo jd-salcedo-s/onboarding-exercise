@@ -38,9 +38,9 @@ export class AuthorController {
         const data = req.body
         const id = Number(req.params.id)
         try {
-            const updated_author = await AuthorRepository.update(id, data)
+            const updated_author_count = await AuthorRepository.update(id, data)
 
-            return res.json(updated_author)
+            return res.json(updated_author_count)
         } catch {
             return res.status(500)
         }
