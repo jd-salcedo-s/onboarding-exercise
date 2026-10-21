@@ -8,7 +8,7 @@ export class StaffRepository {
 
     static async getById(id: Number) {
         return await Staff.findOne({
-            where: {id}
+            where: { id }
         })
     }
 
@@ -26,9 +26,9 @@ export class StaffRepository {
         const updated_staff = await Staff.update({
             name: data.name,
             username: data.username,
-            password: data.password 
-        }, 
-            { where: {id} }
+            password: data.password
+        },
+            { where: { id } }
         )
 
         return updated_staff
@@ -36,7 +36,13 @@ export class StaffRepository {
 
     static async delete(id: Number) {
         return await Staff.destroy({
-            where: {id}
+            where: { id }
+        })
+    }
+
+    static async findByUsername(username: String) {
+        return await Staff.findOne({
+            where: { username }
         })
     }
 }

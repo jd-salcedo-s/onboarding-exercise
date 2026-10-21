@@ -1,4 +1,4 @@
-import { ReservationStatus, status_transitions } from "./reservation_status.js";
+import { ReservationStatus, status_transitions } from "./reservation_status.ts";
 
 export class ReservationStateMachine {
     static isValidStatus(status: unknown): status is ReservationStatus {

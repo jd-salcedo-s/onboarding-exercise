@@ -19,6 +19,8 @@ Content-Type: application/json
 {
     "reservation_status": "completed"
 }
+### delete
+DELETE {{baseUrl}}/reservations/8
 
 
 ### AUTHOR
@@ -33,12 +35,15 @@ Content-Type: application/json
     "name": "Gabriel Garcia"
 }
 ### update
-PATCH {{baseUrl}}/author/1
+PATCH {{baseUrl}}/author/6
 Content-Type: application/json
 
 {
-    "name": "Gabriel Garcia Marquez"
+    "name": "Marquez"
 }
+### delete
+DELETE {{baseUrl}}/author/6
+
 
 ### BOOK
 GET {{baseUrl}}/book
@@ -55,7 +60,7 @@ Content-Type: application/json
     "publish_date": "2020-10-22"
 }
 ### update
-PATCH {{baseUrl}}/book/4
+PATCH {{baseUrl}}/book/7
 Content-Type: application/json
 
 {
@@ -65,6 +70,9 @@ Content-Type: application/json
     "publish_date": "2020-10-22",
     "is_booked": "true"
 }
+### delete
+DELETE {{baseUrl}}/book/7
+
 
 ### CLIENT
 GET {{baseUrl}}/client
@@ -80,7 +88,7 @@ Content-Type: application/json
     "email": "jds@correo.co"
 }
 ### update
-PATCH {{baseUrl}}/client/1
+PATCH {{baseUrl}}/client/3
 Content-Type: application/json
 
 {
@@ -88,6 +96,8 @@ Content-Type: application/json
     "phone_number": "3122222222",
     "email": "jds@correo.co"
 }
+### delete
+DELETE {{baseUrl}}/client/3
 
 ### GENRE
 GET {{baseUrl}}/genre
@@ -107,6 +117,8 @@ Content-Type: application/json
 {
     "description": "Comedia"
 }
+### delete
+DELETE {{baseUrl}}/genre/3
 
 ### STAFF
 GET {{baseUrl}}/staff
@@ -122,11 +134,13 @@ Content-Type: application/json
     "password": "Temp123*"
 }
 ### update
-PATCH {{baseUrl}}/staff/1
+PATCH {{baseUrl}}/staff/2
 Content-Type: application/json
 
 {
     "name": "Juanito",
-    "username": "juanito.user",
+    "username": "juanito.user1",
     "password": "Temp123*"
 }
+### delete
+DELETE {{baseUrl}}/staff/1

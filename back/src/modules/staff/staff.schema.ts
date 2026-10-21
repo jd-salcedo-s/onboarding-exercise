@@ -1,0 +1,15 @@
+import Joi from "joi";
+
+export const staffIdSchema = Joi.number().positive().integer().min(1).required()
+
+export const staffCreateSchema = Joi.object({
+    name: Joi.string().max(255).required(),
+    username: Joi.string().max(100).required(),
+    password: Joi.string().max(255).required()
+})
+
+export const staffUpdateSchema = Joi.object({
+    name: Joi.string().max(255).optional(),
+    username: Joi.string().max(100).optional(),
+    password: Joi.string().max(255).optional()
+})

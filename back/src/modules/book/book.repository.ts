@@ -8,13 +8,13 @@ export class BookRepository {
 
     static async getById(id: Number) {
         return await Book.findOne({
-            where: {id}
+            where: { id }
         })
     }
 
     static async create(data: BookCreate) {
         const is_booked = false
-        
+
         const created_book = await Book.create({
             author_id: data.author_id,
             genre_id: data.genre_id,
@@ -27,14 +27,14 @@ export class BookRepository {
     }
 
     static async update(id: Number, data: BookUpdate) {
-        const updated_book_count = await Book.update({ 
+        const updated_book_count = await Book.update({
             author_id: data.author_id,
             genre_id: data.genre_id,
             title: data.title,
             publish_date: data.publish_date,
             is_booked: data.is_booked
-        }, 
-            { where: {id} }
+        },
+            { where: { id } }
         )
 
         return updated_book_count
@@ -42,7 +42,13 @@ export class BookRepository {
 
     static async delete(id: Number) {
         return await Book.destroy({
-            where: {id}
+            where: { id }
+        })
+    }
+
+    static async count(id: Number) {
+        return await Book.count({
+            where: { genre_id: id }
         })
     }
 }

@@ -10,12 +10,12 @@ export class ReservationRepository {
         return await Reservation.findAll()
     }
 
-     static async getById(id: Number) {
+    static async getById(id: Number) {
         console.log("id: ", id)
 
         console.log("asociaciones: ", Object.keys(Reservation.associations))
         const reservation = await Reservation.findOne({
-            where: {id},
+            where: { id },
             include: [
                 {
                     association: 'books'
@@ -35,7 +35,7 @@ export class ReservationRepository {
         const expiry_days = 15
         const expiry_date = new Date(start_date)
         expiry_date.setDate(expiry_date.getDate() + expiry_days)
-        
+
         const created_reservation = await Reservation.create({
             client_id: data.client_id,
             staff_id: data.staff_id,
@@ -60,9 +60,9 @@ export class ReservationRepository {
 
             update_data.reservation_status = data.reservation_status
         }
-        
-        const updated_reservation_count = await Reservation.update(update_data, 
-            { where: {id} }
+
+        const updated_reservation_count = await Reservation.update(update_data,
+            { where: { id } }
         )
 
         return updated_reservation_count
@@ -70,19 +70,36 @@ export class ReservationRepository {
 
     static async delete(id: Number) { // TODO: solo eliminar si el status en 'completed'. O no es necesario
         return await Reservation.destroy({
-            where: {id}
+            where: { id }
         })
     }
 
     // actualiza el reservation_status con la maquina de estados  
-    static async updateStatus(id: Number, nextStatus: ReservationStatus){
+    static async updateStatus(id: Number, nextStatus: ReservationStatus) {
         const reservation = await this.getById(id)
 
         if (!reservation) {
             throw new Error(`Reservation with id ${id} don't exists`)
         }
         const current_status = reservation.get('reservation_status') as ReservationStatus
-        
-        ReservationStateMachine.validateTransition(current_status, nextStatus)   
+
+        ReservationStateMachine.validateTransition(current_status, nextStatus)
     }
+
+    static async clientReservations(id: Number) {
+        const reservations = await Reservation.count({
+            where: { client_id: id }
+        })
+
+        return reservations
+    }
+
+    static async staffReservations(id: Number) {
+        const reservations = await Reservation.count({
+            where: { staff_id: id }
+        })
+
+        return reservations
+    }
+
 }
