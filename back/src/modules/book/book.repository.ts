@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Book from "./book.model.ts";
 import type { BookCreate, BookUpdate } from "./book.types.ts";
 
@@ -9,6 +10,16 @@ export class BookRepository {
     static async getById(id: Number) {
         return await Book.findOne({
             where: { id }
+        })
+    }
+
+    static async getByIds(ids: Number[]) {
+        return await Book.findAll({
+            where: {
+                id: {
+                    [Op.in]: ids
+                }
+            }
         })
     }
 

@@ -3,17 +3,18 @@
 ### RESERVATIONS
 GET {{baseUrl}}/reservations
 ### By id
-GET {{baseUrl}}/reservations/1
+GET {{baseUrl}}/reservations/37
 ### create
 POST {{baseUrl}}/reservations
 Content-Type: application/json
 
 {
     "client_id": 1,
-    "staff_id": 1
+    "staff_id": 8,
+    "books_ids": [3,8]
 }
 ### update
-PATCH {{baseUrl}}/reservations/1
+PATCH {{baseUrl}}/reservations/40
 Content-Type: application/json
 
 {
@@ -54,10 +55,10 @@ POST {{baseUrl}}/book
 Content-Type: application/json
 
 {
-    "author_id": 1,
-    "genre_id": 1,
-    "title": "Libro x",
-    "publish_date": "2020-10-22"
+    "author_id": 7,
+    "genre_id": 4,
+    "title": "Libro x de ficcion",
+    "publish_date": "2026-10-22"
 }
 ### update
 PATCH {{baseUrl}}/book/7
@@ -108,7 +109,7 @@ POST {{baseUrl}}/genre
 Content-Type: application/json
 
 {
-    "description": "Terror"
+    "description": "Ficcion"
 }
 ### update
 PATCH {{baseUrl}}/genre/1
@@ -129,8 +130,8 @@ POST {{baseUrl}}/staff
 Content-Type: application/json
 
 {
-    "name": "Juanita",
-    "username": "juanita.user",
+    "name": "Salcedo",
+    "username": "salcedo.user",
     "password": "Temp123*"
 }
 ### update

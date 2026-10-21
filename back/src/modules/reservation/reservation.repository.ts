@@ -1,7 +1,5 @@
-import Book from "../book/book.model.ts";
 import Reservation from "./reservation.model.ts";
 import type { ReservationCreate, ReservationUpdate } from "./reservation.types.ts";
-import ReservationBook from "./reservation_book.model.ts";
 import { ReservationStateMachine } from "./reservation_state_machine.ts";
 import type { ReservationStatus } from "./reservation_status.ts";
 
@@ -11,9 +9,6 @@ export class ReservationRepository {
     }
 
     static async getById(id: Number) {
-        console.log("id: ", id)
-
-        console.log("asociaciones: ", Object.keys(Reservation.associations))
         const reservation = await Reservation.findOne({
             where: { id },
             include: [
@@ -24,7 +19,6 @@ export class ReservationRepository {
             logging: console.log
         })
 
-        console.log("Consulta finalizada")
         return reservation
     }
 
