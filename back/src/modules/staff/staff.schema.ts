@@ -13,3 +13,8 @@ export const staffUpdateSchema = Joi.object({
     username: Joi.string().max(100).optional(),
     password: Joi.string().max(255).optional()
 })
+
+export const staffLoginSchema = Joi.object({
+    username: Joi.string().max(100).required(),
+    password: Joi.string().max(255).required()
+})

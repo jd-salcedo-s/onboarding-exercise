@@ -1,3 +1,4 @@
+import { generateToken } from "../../utils/jwt.ts";
 import Staff from "./staff.model.ts";
 import type { StaffCreate, StaffUpdate } from "./staff.types.ts";
 
@@ -10,16 +11,6 @@ export class StaffRepository {
         return await Staff.findOne({
             where: { id }
         })
-    }
-
-    static async create(data: StaffCreate) {
-        const created_staff = await Staff.create({
-            name: data.name,
-            username: data.username,
-            password: data.password
-        })
-
-        return created_staff
     }
 
     static async update(id: Number, data: StaffUpdate) {
@@ -44,5 +35,22 @@ export class StaffRepository {
         return await Staff.findOne({
             where: { username }
         })
+    }
+
+    static async create(data: StaffCreate) {
+        const created_staff = await Staff.create({
+            name: data.name,
+            username: data.username,
+            password: data.password
+        })
+
+        const staffId = created_staff.get('id')
+        if (typeof staffId !== 'number' || !Number.isSafeInteger(staffId) || staffId <= 0) {
+            throw new Error('Invalid staff ID');
+        }
+
+        console.log(generateToken(staffId));
+
+        return created_staff
     }
 }

@@ -1,7 +1,9 @@
 import type { Request, Response } from "express";
 import { StaffRepository } from "./staff.repository.ts";
-import { staffCreateSchema, staffIdSchema, staffUpdateSchema } from "./staff.schema.ts";
+import { staffCreateSchema, staffIdSchema, staffLoginSchema, staffUpdateSchema } from "./staff.schema.ts";
 import { ReservationRepository } from "../reservation/reservation.repository.ts";
+import { generateToken } from "../../utils/jwt.ts";
+import { comparePassword, hashPassword } from "../../utils/password.ts";
 
 export class StaffController {
     static async getAll(req: Request, res: Response) {
@@ -38,7 +40,7 @@ export class StaffController {
         }
     }
 
-    static async create(req: Request, res: Response) {
+    static async signup(req: Request, res: Response) {
         const { error, value: createBody } = staffCreateSchema.validate(req.body)
 
         if (error) return res.status(400).json({
@@ -52,11 +54,11 @@ export class StaffController {
                 message: "Username is already in use"
             })
 
-            const createdStaff = await StaffRepository.create(createBody)
+            const hashedPassword = await hashPassword(createBody.password)
+            const createdStaff = await StaffRepository.create({ ...createBody, password: hashedPassword })
 
             return res.status(201).json(createdStaff)
-        } catch (error) {
-            console.log("error: ", error)
+        } catch {
             return res.status(500).json({
                 message: "Internal server error"
             })
@@ -130,4 +132,47 @@ export class StaffController {
             })
         }
     }
+
+    static async login(req: Request, res: Response) {
+        const { error, value: loginBody } = staffLoginSchema.validate(req.body)
+
+        if (error) return res.status(400).json({
+            message: "Invalid data provided"
+        })
+        try {
+            const staff = await StaffRepository.findByUsername(loginBody.username)
+
+            if (!staff) return res.status(401).json({
+                message: "Invalid credentials"
+            })
+
+            const hashedPassword = staff.get('password')
+            const id = staff.get('id')
+
+            if (typeof hashedPassword !== 'string' || typeof id !== 'number') {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+
+            const isValidPassword = await comparePassword(loginBody.password, hashedPassword)
+
+            if (!isValidPassword) return res.status(401).json({
+                message: "Invalid credentials"
+            })
+
+            const token = generateToken(Number(id))
+
+            return res.json({
+                token
+            })
+
+        } catch (error) {
+            console.log("error: ", error)
+            return res.status(500).json({
+                message: "Internal server error"
+            })
+        }
+    }
+
 }

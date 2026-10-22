@@ -1,4 +1,5 @@
-@baseUrl = http://localhost:3000
+@baseUrl = http://localhost:3000/library
+@staffUrl = http://localhost:3000
 
 ### RESERVATIONS
 GET {{baseUrl}}/reservations
@@ -122,20 +123,11 @@ Content-Type: application/json
 DELETE {{baseUrl}}/genre/3
 
 ### STAFF
-GET {{baseUrl}}/staff
+GET {{staffUrl}}/staff
 ### By id
-GET {{baseUrl}}/staff/1
-### create
-POST {{baseUrl}}/staff
-Content-Type: application/json
-
-{
-    "name": "Salcedo",
-    "username": "salcedo.user",
-    "password": "Temp123*"
-}
+GET {{staffUrl}}/staff/1
 ### update
-PATCH {{baseUrl}}/staff/2
+PATCH {{staffUrl}}/staff/2
 Content-Type: application/json
 
 {
@@ -144,4 +136,21 @@ Content-Type: application/json
     "password": "Temp123*"
 }
 ### delete
-DELETE {{baseUrl}}/staff/1
+DELETE {{staffUrl}}/staff/1
+### signup
+POST {{staffUrl}}/staff/signup
+Content-Type: application/json
+
+{
+    "name": "Salcedo",
+    "username": "salcedo.user4",
+    "password": "Temp123*"
+}
+### login
+POST {{staffUrl}}/staff/login
+Content-Type: application/json
+
+{
+    "username": "salcedo.user4",
+    "password": "Temp123*"
+}
