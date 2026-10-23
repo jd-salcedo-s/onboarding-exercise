@@ -4,6 +4,7 @@ import { staffCreateSchema, staffIdSchema, staffLoginSchema, staffUpdateSchema }
 import { ReservationRepository } from "../reservation/reservation.repository.ts";
 import { generateToken } from "../../utils/jwt.ts";
 import { comparePassword, hashPassword } from "../../utils/password.ts";
+import type { StaffUpdate } from "./staff.types.ts";
 
 export class StaffController {
     static async getAll(req: Request, res: Response) {
@@ -82,11 +83,13 @@ export class StaffController {
         })
 
         try {
-            const existingUsername = await StaffRepository.findByUsername(updateBody.username)
+            if (updateBody.username) {
+                const existingUsername = await StaffRepository.findByUsername(updateBody.username)
 
-            if (existingUsername) return res.status(400).json({
-                message: "Username is already in use"
-            })
+                if (existingUsername) return res.status(400).json({
+                    message: "Username is already in use"
+                })
+            }
 
             const staff = await StaffRepository.getById(id)
 
@@ -94,7 +97,21 @@ export class StaffController {
                 message: "Staff not found"
             })
 
-            const updatedStaffCount = await StaffRepository.update(id, updateBody)
+            let updateData: StaffUpdate = {}
+            if (updateBody.username === staff.get('username')) {
+                updateData = {
+                    name: updateBody.name,
+                    password: await hashPassword(updateBody.password)
+                }
+
+            } else {
+                updateData = {
+                    ...updateBody,
+                    password: await hashPassword(updateBody.password)
+                }
+            }
+
+            const updatedStaffCount = await StaffRepository.update(id, updateData)
 
             return res.json({
                 updated_count: updatedStaffCount

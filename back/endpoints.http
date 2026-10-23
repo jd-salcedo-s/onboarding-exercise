@@ -143,9 +143,10 @@ POST {{staffUrl}}/staff/signup
 Content-Type: application/json
 
 {
-    "name": "Salcedo",
-    "username": "salcedo.user4",
-    "password": "Temp123*"
+    "name": "member",
+    "username": "member",
+    "password": "Temp123*",
+    "role": "staff"
 }
 ### login
 POST {{staffUrl}}/staff/login

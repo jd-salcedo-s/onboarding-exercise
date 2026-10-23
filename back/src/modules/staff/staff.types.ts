@@ -1,9 +1,12 @@
+import type { StaffRoles } from "./staff.roles.ts"
+
 export type Staff = {
     id: Number,
     name: String,
     username: String,
     password: String,
-    status: Boolean
+    status: Boolean,
+    role: StaffRoles
 }
 
 export type StaffCreate = Omit<Staff, 'id' | 'status'>

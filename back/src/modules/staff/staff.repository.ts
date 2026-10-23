@@ -41,7 +41,8 @@ export class StaffRepository {
         const created_staff = await Staff.create({
             name: data.name,
             username: data.username,
-            password: data.password
+            password: data.password,
+            role: data.role
         })
 
         const staffId = created_staff.get('id')

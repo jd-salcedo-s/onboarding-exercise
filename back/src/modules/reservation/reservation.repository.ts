@@ -16,7 +16,11 @@ export class ReservationRepository {
                 },
                 {
                     association: 'staff',
-                    attributes: ["name", "username", "status"]
+                    attributes: ["name", "username"]
+                },
+                {
+                    association: 'client',
+                    attributes: ["name", "phone_number", "email"]
                 }
             ],
             attributes: {
@@ -38,7 +42,11 @@ export class ReservationRepository {
                 },
                 {
                     association: 'staff',
-                    attributes: ["name", "username", "status"]
+                    attributes: ["name", "username"]
+                },
+                {
+                    association: 'client',
+                    attributes: ["name", "phone_number", "email"]
                 }
             ],
             attributes: {

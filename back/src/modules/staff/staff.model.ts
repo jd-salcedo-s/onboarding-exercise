@@ -24,6 +24,11 @@ const Staff = sequelize.define('Staff', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true
+    },
+    role: {
+        type: DataTypes.ENUM('admin', 'staff'),
+        allowNull: false,
+        defaultValue: 'staff'
     }
 }, {
     tableName: 'staff',
