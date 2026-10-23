@@ -3,14 +3,13 @@ import express from "express"
 import { staffRouter } from './modules/staff/staff.routes.ts'
 import './models/models_relations.ts'
 import { libraryRouter } from './modules/library.routes.ts'
+import { authMiddleware } from './middlewares/auth.middleware.ts'
 
 const app = express()
 app.use(express.json())
 
-// AUTHORIZATION MIDDLEWARE
-// auth login signup logout
 app.use('/staff', staffRouter)
-app.use('/library', libraryRouter)
+app.use('/library', authMiddleware, libraryRouter)
 
 const PORT = process.env.PORT ?? 3000
 

@@ -8,8 +8,7 @@ export class BookController {
             const books = await BookRepository.getAll()
 
             return res.json(books)
-        } catch (error) {
-            console.log("error: ", error)
+        } catch {
             return res.status(500).json({
                 message: "Internal server error"
             })

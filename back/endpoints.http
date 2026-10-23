@@ -3,6 +3,7 @@
 
 ### RESERVATIONS
 GET {{baseUrl}}/reservation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxMSwiaWF0IjoxNzkyNzYzMzY4LCJleHAiOjE3OTI3OTIxNjh9.r8_YKEeDV7e156mOJe-fDdDo0bvBvBb7qFy7qKGST20
 ### By id
 GET {{baseUrl}}/reservation/37
 ### create

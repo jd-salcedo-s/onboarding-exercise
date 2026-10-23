@@ -164,7 +164,7 @@ export class StaffController {
                 message: "Invalid credentials"
             })
 
-            const token = generateToken(Number(id))
+            const token = generateToken(id)
 
             return res.json({
                 token
