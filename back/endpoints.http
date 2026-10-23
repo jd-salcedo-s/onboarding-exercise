@@ -3,20 +3,23 @@
 
 ### RESERVATIONS
 GET {{baseUrl}}/reservation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxMSwiaWF0IjoxNzkyNzYzMzY4LCJleHAiOjE3OTI3OTIxNjh9.r8_YKEeDV7e156mOJe-fDdDo0bvBvBb7qFy7qKGST20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoyLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODMwOTgsImV4cCI6MTc5MjgxMTg5OH0.u3ah-a1VWtSROMf64SKbheF3gFwVwAf4B9Y49OOJbZc
 ### By id
-GET {{baseUrl}}/reservation/37
+GET {{baseUrl}}/reservation/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
 ### create
 POST {{baseUrl}}/reservation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
 Content-Type: application/json
 
 {
     "client_id": 1,
-    "staff_id": 8,
-    "books_ids": [3,8]
+    "staff_id": 3,
+    "books_ids": [9]
 }
 ### update
-PATCH {{baseUrl}}/reservation/40
+PATCH {{baseUrl}}/reservation/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODU2MjgsImV4cCI6MTc5MjgxNDQyOH0.3cGSBeGGVhBbw8lwFmXdbSUsxFQB_asRVJbmKG5idu4
 Content-Type: application/json
 
 {
@@ -50,15 +53,17 @@ DELETE {{baseUrl}}/author/6
 
 ### BOOK
 GET {{baseUrl}}/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
 ### By id
 GET {{baseUrl}}/book/1
 ### create
 POST {{baseUrl}}/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
 Content-Type: application/json
 
 {
-    "author_id": 7,
-    "genre_id": 4,
+    "author_id": 1,
+    "genre_id": 1,
     "title": "Libro x de ficcion",
     "publish_date": "2026-10-22"
 }
@@ -125,34 +130,43 @@ DELETE {{baseUrl}}/genre/3
 
 ### STAFF
 GET {{staffUrl}}/staff
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoyLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODM1MzAsImV4cCI6MTc5MjgxMjMzMH0.it_PeKePNqPqIRvcusKqaZ3wHwsGwOqFx4Y9eNIqJyo
 ### By id
 GET {{staffUrl}}/staff/1
 ### update
 PATCH {{staffUrl}}/staff/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
 Content-Type: application/json
 
 {
     "name": "Juanito",
-    "username": "juanito.user1",
-    "password": "Temp123*"
+    "username": "juanito.user2",
+    "password": "Temp123*",
+    "role": "admin"
 }
 ### delete
 DELETE {{staffUrl}}/staff/1
+
+
+### CREDENTIALS
 ### signup
-POST {{staffUrl}}/staff/signup
+POST {{staffUrl}}/signup
 Content-Type: application/json
 
 {
     "name": "member",
-    "username": "member",
+    "username": "member2",
     "password": "Temp123*",
     "role": "staff"
 }
 ### login
-POST {{staffUrl}}/staff/login
+POST {{staffUrl}}/login
 Content-Type: application/json
 
 {
-    "username": "salcedo.user4",
+    "username": "member2",
     "password": "Temp123*"
 }
+### logout
+POST {{staffUrl}}/staff/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoyLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODMwOTgsImV4cCI6MTc5MjgxMTg5OH0.u3ah-a1VWtSROMf64SKbheF3gFwVwAf4B9Y49OOJbZc

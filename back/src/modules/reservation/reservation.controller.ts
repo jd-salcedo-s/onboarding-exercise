@@ -103,6 +103,10 @@ export class ReservationController {
             message: "Invalid data provided"
         })
 
+        if (req.user?.role !== "admin" && updateBody.reservation_status === 'completed') return res.status(403).json({
+            message: "Only admins can mark a reservation as completed"
+        })
+
         try {
             const reservation = await ReservationRepository.getById(id)
 
@@ -133,7 +137,7 @@ export class ReservationController {
             return res.json({
                 updated_count: updatedReservationCount
             })
-        } catch (error) {
+        } catch {
             return res.status(500).json({
                 message: "Internal server error"
             })

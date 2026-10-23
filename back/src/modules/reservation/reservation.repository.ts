@@ -9,7 +9,7 @@ export class ReservationRepository {
             include: [
                 {
                     association: 'books',
-                    attributes: ["title", "publish_date", "is_booked"],
+                    attributes: ["id", "title", "publish_date", "is_booked"],
                     through: {
                         attributes: []
                     }
@@ -35,7 +35,7 @@ export class ReservationRepository {
             include: [
                 {
                     association: 'books',
-                    attributes: ["title", "publish_date", "is_booked"],
+                    attributes: ["id", "title", "publish_date", "is_booked"],
                     through: {
                         attributes: []
                     }

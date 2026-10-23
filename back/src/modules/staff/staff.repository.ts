@@ -17,7 +17,8 @@ export class StaffRepository {
         const updated_staff = await Staff.update({
             name: data.name,
             username: data.username,
-            password: data.password
+            password: data.password,
+            role: data.role
         },
             { where: { id } }
         )

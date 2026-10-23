@@ -5,6 +5,7 @@ import { ReservationRepository } from "../reservation/reservation.repository.ts"
 import { generateToken } from "../../utils/jwt.ts";
 import { comparePassword, hashPassword } from "../../utils/password.ts";
 import type { StaffUpdate } from "./staff.types.ts";
+import { saveOnBlacklist } from "../../utils/blacklist_file.ts";
 
 export class StaffController {
     static async getAll(req: Request, res: Response) {
@@ -57,7 +58,7 @@ export class StaffController {
 
             const hashedPassword = await hashPassword(createBody.password)
             const createdStaff = await StaffRepository.create({ ...createBody, password: hashedPassword })
-            const token = generateToken(Number(createdStaff.get('id')))
+            const token = generateToken(Number(createdStaff.get('id')), createBody.role)
 
             return res.status(201).json({
                 token
@@ -97,11 +98,16 @@ export class StaffController {
                 message: "Staff not found"
             })
 
+            if (req.user?.role === "staff" && updateBody.role) return res.status(401).json({
+                message: "Unauthorized to update role"
+            })
+
             let updateData: StaffUpdate = {}
             if (updateBody.username === staff.get('username')) {
                 updateData = {
                     name: updateBody.name,
-                    password: await hashPassword(updateBody.password)
+                    password: await hashPassword(updateBody.password),
+                    role: updateBody.Role
                 }
 
             } else {
@@ -168,8 +174,9 @@ export class StaffController {
 
             const hashedPassword = staff.get('password')
             const id = staff.get('id')
+            const role = staff.get('role')
 
-            if (typeof hashedPassword !== 'string' || typeof id !== 'number') {
+            if (typeof hashedPassword !== 'string' || typeof id !== 'number' || typeof role !== 'string') {
                 return res.status(500).json({
                     message: "Internal server error"
                 });
@@ -181,7 +188,7 @@ export class StaffController {
                 message: "Invalid credentials"
             })
 
-            const token = generateToken(id)
+            const token = generateToken(id, role)
 
             return res.json({
                 token
@@ -192,6 +199,19 @@ export class StaffController {
                 message: "Internal server error"
             })
         }
+    }
+
+    static async logout(req: Request, res: Response) {
+        if (!req.token) return res.status(401).json({
+            message: "Authenticacion required"
+        })
+
+        await saveOnBlacklist(req.token)
+
+        return res.json({
+            message: "Logged out succesfull"
+        })
+
     }
 
 }

@@ -4,11 +4,13 @@ import { staffRouter } from './modules/staff/staff.routes.ts'
 import './models/models_relations.ts'
 import { libraryRouter } from './modules/library.routes.ts'
 import { authMiddleware } from './middlewares/auth.middleware.ts'
+import { credentialsRouter } from './modules/credentials.routes.ts'
 
 const app = express()
 app.use(express.json())
 
-app.use('/staff', staffRouter)
+app.use('/', credentialsRouter)
+app.use('/staff', authMiddleware, staffRouter)
 app.use('/library', authMiddleware, libraryRouter)
 
 const PORT = process.env.PORT ?? 3000

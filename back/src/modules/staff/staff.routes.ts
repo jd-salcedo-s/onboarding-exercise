@@ -7,6 +7,4 @@ staffRouter.get('/', StaffController.getAll)
 staffRouter.get('/:id', StaffController.getById)
 staffRouter.patch('/:id', StaffController.update)
 staffRouter.delete('/:id', StaffController.delete)
-
-staffRouter.post('/login', StaffController.login)
-staffRouter.post('/signup', StaffController.signup)
+staffRouter.post('/logout', StaffController.logout)
