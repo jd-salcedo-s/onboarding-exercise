@@ -56,8 +56,11 @@ export class StaffController {
 
             const hashedPassword = await hashPassword(createBody.password)
             const createdStaff = await StaffRepository.create({ ...createBody, password: hashedPassword })
+            const token = generateToken(Number(createdStaff.get('id')))
 
-            return res.status(201).json(createdStaff)
+            return res.status(201).json({
+                token
+            })
         } catch {
             return res.status(500).json({
                 message: "Internal server error"
@@ -168,7 +171,6 @@ export class StaffController {
             })
 
         } catch (error) {
-            console.log("error: ", error)
             return res.status(500).json({
                 message: "Internal server error"
             })
