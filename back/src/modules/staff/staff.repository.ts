@@ -49,8 +49,6 @@ export class StaffRepository {
             throw new Error('Invalid staff ID');
         }
 
-        console.log(generateToken(staffId));
-
         return created_staff
     }
 }

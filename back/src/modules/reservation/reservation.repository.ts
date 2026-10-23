@@ -5,7 +5,24 @@ import type { ReservationStatus } from "./reservation_status.ts";
 
 export class ReservationRepository {
     static async getAll() {
-        return await Reservation.findAll()
+        return await Reservation.findAll({
+            include: [
+                {
+                    association: 'books',
+                    attributes: ["title", "publish_date", "is_booked"],
+                    through: {
+                        attributes: []
+                    }
+                },
+                {
+                    association: 'staff',
+                    attributes: ["name", "username", "status"]
+                }
+            ],
+            attributes: {
+                exclude: ["client_id", "staff_id"]
+            }
+        })
     }
 
     static async getById(id: Number) {
@@ -13,10 +30,20 @@ export class ReservationRepository {
             where: { id },
             include: [
                 {
-                    association: 'books'
+                    association: 'books',
+                    attributes: ["title", "publish_date", "is_booked"],
+                    through: {
+                        attributes: []
+                    }
+                },
+                {
+                    association: 'staff',
+                    attributes: ["name", "username", "status"]
                 }
             ],
-            logging: console.log
+            attributes: {
+                exclude: ["client_id", "staff_id"]
+            }
         })
 
         return reservation

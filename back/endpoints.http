@@ -2,11 +2,11 @@
 @staffUrl = http://localhost:3000
 
 ### RESERVATIONS
-GET {{baseUrl}}/reservations
+GET {{baseUrl}}/reservation
 ### By id
-GET {{baseUrl}}/reservations/37
+GET {{baseUrl}}/reservation/37
 ### create
-POST {{baseUrl}}/reservations
+POST {{baseUrl}}/reservation
 Content-Type: application/json
 
 {
@@ -15,14 +15,14 @@ Content-Type: application/json
     "books_ids": [3,8]
 }
 ### update
-PATCH {{baseUrl}}/reservations/40
+PATCH {{baseUrl}}/reservation/40
 Content-Type: application/json
 
 {
     "reservation_status": "completed"
 }
 ### delete
-DELETE {{baseUrl}}/reservations/8
+DELETE {{baseUrl}}/reservation/8
 
 
 ### AUTHOR

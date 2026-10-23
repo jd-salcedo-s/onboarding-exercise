@@ -4,12 +4,31 @@ import type { BookCreate, BookUpdate } from "./book.types.ts";
 
 export class BookRepository {
     static async getAll() {
-        return await Book.findAll()
+        return await Book.findAll({
+            include: [
+                {
+                    association: 'author',
+                    attributes: ["name"],
+                }
+            ],
+            attributes: {
+                exclude: ["author_id", "genre_id"]
+            }
+        })
     }
 
     static async getById(id: Number) {
         return await Book.findOne({
-            where: { id }
+            where: { id },
+            include: [
+                {
+                    association: 'author',
+                    attributes: ["name"]
+                }
+            ],
+            attributes: {
+                exclude: ["author_id", "genre_id"]
+            }
         })
     }
 
