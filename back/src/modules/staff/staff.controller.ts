@@ -98,7 +98,7 @@ export class StaffController {
                 message: "Staff not found"
             })
 
-            if (req.user?.role === "staff" && updateBody.role) return res.status(401).json({
+            if (req.user?.role !== "admin" && updateBody.role) return res.status(403).json({
                 message: "Unauthorized to update role"
             })
 

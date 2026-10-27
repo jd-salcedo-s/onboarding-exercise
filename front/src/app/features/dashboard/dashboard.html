@@ -1,0 +1,19 @@
+<main class="dashboard">
+    <header class="dashboard-header">
+        <div>
+            <p class="eybrow">Library Management</p>
+            <h1>Dashboard</h1>
+            <p class="subtitle">
+                Select a sectioin to manage your library.
+            </p>
+        </div>
+
+        <app-button class="logout-button" text="Sign out" type="button" (click)="onLogout()" />
+    </header>
+
+    <nav class="cards-grid" aria-label="Library sections">
+        @for (card of cards; track card.link){
+        <app-card [icon]="card.icon" [text]="card.text" [link]="card.link" />
+        }
+    </nav>
+</main>

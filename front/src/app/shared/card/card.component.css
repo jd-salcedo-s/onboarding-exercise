@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+ 
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 130px;
+  padding: 24px;
+  box-sizing: border-box;
+ 
+  background: #ffffff;
+  border: 1px solid #e8eaf2;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(31, 41, 80, 0.06);
+ 
+  color: #172033;
+  text-decoration: none;
+  font-family: inherit;
+ 
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+ 
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #c7d2fe;
+  box-shadow: 0 14px 32px rgba(31, 41, 80, 0.12);
+}
+ 
+.card:focus-visible {
+  outline: 3px solid var(--mat-sys-secondary, #4f46e5);
+  outline-offset: 4px;
+}
+ 
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+ 
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+ 
+.icon-container mat-icon {
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+}
+ 
+.card-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 18px;
+  font-weight: 600;
+}
+ 
+.arrow {
+  flex-shrink: 0;
+  color: #737b8c;
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+ 
+  .card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #f0f6ff;
+  color: #172033;
+}
+
+.library-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+ 
+.library-form mat-form-field {
+  width: 100%;
+}
+ 
+.library-form .form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+ 
+.library-form a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+ 
+.library-form a:hover {
+  text-decoration: underline;
+}
+ 
+.library-form .bottom-text {
+  margin: 26px 0 0;
+  font-size: 14px;
+  text-align: center;
+}
+ 
+.library-form .terms {
+  margin: 4px 0;
+  color: #737b8c;
+  font-size: 12px;
+  line-height: 1.7;
+}
+ 

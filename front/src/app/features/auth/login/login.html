@@ -1,0 +1,31 @@
+<app-form-container title="Login">
+  <form class="library-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" autocomplete="username" />
+
+      @if (loginForm.controls.username.hasError('required')) {
+      <mat-error>Username is required</mat-error>
+
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" autocomplete="current-password" />
+
+      @if (loginForm.controls.password.hasError('required')) {
+      <mat-error>Password is required</mat-error>
+
+      }
+    </mat-form-field>
+
+    <app-button text="Sign in" type="submit" />
+
+    <p class="bottom-text">
+
+      Don't have an account?
+      <a routerLink="/signup">Sign up</a>
+    </p>
+  </form>
+</app-form-container>
