@@ -57,3 +57,44 @@ body {
   line-height: 1.7;
 }
  
+.list-page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    135deg,
+    #eef2ff 0%,
+    #f5f3ff 50%,
+    #eff6ff 100%
+  );
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  color: #172033;
+}
+ 
+.list-page h1 {
+  margin: 24px 0 10px;
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+ 
+.list-page .subtitle {
+  margin: 0 0 28px;
+  color: #737b8c;
+}
+ 
+.list-page a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+ 
+.list-page a:hover {
+  text-decoration: underline;
+}
+ 
+@media (max-width: 600px) {
+  .list-page {
+    padding: 24px 16px;
+  }
+}

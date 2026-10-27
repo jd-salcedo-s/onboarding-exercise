@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
     FormControl,
     FormGroup,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { FormContainerComponent } from '../../../shared/form-container/form-container.component';
+import { AuthService } from '../../../core/auth.service';
+import { finalize } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -37,8 +40,38 @@ export class LoginComponent {
         }),
     });
 
+    private authService = inject(AuthService)
+    private router = inject(Router)
+
+    loading = signal(false)
+    error = signal('')
+
     onLogin() {
-        console.log("username: ", this.loginForm.value.username)
-        console.log("pwd", this.loginForm.value.password)
+        if (this.loading()) return
+
+        this.error.set('')
+
+        if (this.loginForm.invalid) {
+            this.loginForm.markAllAsTouched()
+            return
+        }
+
+        this.loading.set(true)
+
+        this.authService.login(this.loginForm.getRawValue()).pipe(finalize(() => {
+            this.loading.set(false)
+        }))
+            .subscribe({
+                next: () => {
+                    void this.router.navigate(['/dashboard'])
+                },
+                error: (error: HttpErrorResponse) => {
+                    if (error.status === 401) {
+                        this.error.set('Invalid credentials')
+                    } else {
+                        this.error.set('Could not sign in. Try again')
+                    }
+                }
+            })
     }
 }

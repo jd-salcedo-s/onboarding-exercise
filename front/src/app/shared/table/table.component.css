@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+ 
+.table-container {
+  overflow-x: hidden;
+  background: #ffffff;
+  border: 1px solid #e8eaf2;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(31, 41, 80, 0.06);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+mat-paginator {
+  background: white;
+  border-top: 1px solid #e8eaf2;
+}
+ 
+table {
+  width: 100%;
+  background: #ffffff;
+}
+ 
+.mat-mdc-header-cell {
+  background: #eef2ff;
+  color: #172033;
+  font-weight: 700;
+}
+ 
+.mat-mdc-cell {
+  color: #475569;
+}
+ 
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 16px 24px;
+  border-bottom-color: #e8eaf2;
+}
+ 
+.mat-mdc-row:hover {
+  background: #f8faff;
+}
+ 
+.empty-message {
+  padding: 32px;
+  color: #737b8c;
+  text-align: center;
+}

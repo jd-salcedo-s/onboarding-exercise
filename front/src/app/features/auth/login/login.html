@@ -19,8 +19,13 @@
 
       }
     </mat-form-field>
+    @if (error()) {
+    <p class="form-error" role="alert">
+      {{error()}}
+    </p>
+    }
 
-    <app-button text="Sign in" type="submit" />
+    <app-button [text]="loading() ? 'Signing in...' : 'Sign in'" type="submit" [disabled]="loading()" />
 
     <p class="bottom-text">
 

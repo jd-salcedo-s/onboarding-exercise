@@ -5,8 +5,14 @@ import './models/models_relations.ts'
 import { libraryRouter } from './modules/library.routes.ts'
 import { authMiddleware } from './middlewares/auth.middleware.ts'
 import { credentialsRouter } from './modules/credentials.routes.ts'
+import cors from 'cors'
 
 const app = express()
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
 app.use(express.json())
 
 app.use('/', credentialsRouter)

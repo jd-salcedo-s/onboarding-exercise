@@ -39,7 +39,7 @@
       </mat-select>
     </mat-form-field>
 
-    <app-button text="Sign up" type="submit" />
+    <app-button [text]="loading ? 'Creating account...' : 'Sign up'" type="submit" [disabled]="loading" />
 
     <p class="bottom-text">
 

@@ -4,7 +4,7 @@ import { Component, Input } from "@angular/core";
   selector: 'app-button',
   standalone: true,
   template: `
-<button [type]="type" [style.background]="color">
+<button [type]="type" [style.background]="color" [disabled]="disabled">
       {{ text }}
 </button>
   `,
@@ -52,4 +52,5 @@ export class ButtonComponent {
   @Input() color: string = 'var(--mat-sys-primary)';
   @Input() text: string = '';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() disabled = false
 }
