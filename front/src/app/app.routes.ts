@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/auth.guard';
+import { adminGuard, authGuard } from './core/auth.guard';
 
 export const routes: Routes = [
     {
@@ -18,6 +18,12 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./features/auth/signup/signup')
                 .then(m => m.SignupComponent)
+    },
+    {
+        path: 'unauthorized',
+        loadComponent: () =>
+            import('./features/unauthorized/unauthorized')
+                .then(m => m.UnauthorizedComponent)
     },
     {
         path: '',
@@ -55,12 +61,14 @@ export const routes: Routes = [
             },
             {
                 path: 'staff',
+                canActivate: [adminGuard],
                 loadComponent: () =>
                     import('./features/staff/staff')
                         .then(m => m.StaffComponent)
             },
             {
                 path: 'reservations',
+                canActivate: [adminGuard],
                 loadComponent: () =>
                     import('./features/reservations/reservations')
                         .then(m => m.ReservationsComponent)

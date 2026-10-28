@@ -8,6 +8,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { FormContainerComponent } from '../../../shared/form-container/form-container.component';
 import { AuthService } from '../../../core/auth.service';
@@ -22,6 +23,7 @@ import { HttpErrorResponse } from '@angular/common/http';
         RouterLink,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         ButtonComponent,
         FormContainerComponent,
     ],
@@ -45,6 +47,7 @@ export class LoginComponent {
 
     loading = signal(false)
     error = signal('')
+    passwordVisible = signal(false)
 
     onLogin() {
         if (this.loading()) return
@@ -64,6 +67,7 @@ export class LoginComponent {
             .subscribe({
                 next: () => {
                     void this.router.navigate(['/dashboard'])
+                    localStorage.setItem('username', this.loginForm.value.username!)
                 },
                 error: (error: HttpErrorResponse) => {
                     if (error.status === 401) {

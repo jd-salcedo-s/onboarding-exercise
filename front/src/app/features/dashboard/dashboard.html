@@ -1,10 +1,10 @@
 <main class="dashboard">
     <header class="dashboard-header">
         <div>
-            <p class="eybrow">Library Management</p>
+            <p class="eyebrow">Library Management</p>
             <h1>Dashboard</h1>
             <p class="subtitle">
-                Select a sectioin to manage your library.
+                Select a section to manage your library.
             </p>
         </div>
 
@@ -16,4 +16,11 @@
         <app-card [icon]="card.icon" [text]="card.text" [link]="card.link" />
         }
     </nav>
+    <section class="profile-card" aria-label="Signed-in account">
+        <div class="profile-details">
+            <span class="profile-label">Signed in as</span>
+            <h2 class="profile-name">{{ username || 'User' }}</h2>
+        </div>
+        <span class="role-badge">{{ role || 'Member' }}</span>
+    </section>
 </main>

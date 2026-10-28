@@ -48,6 +48,27 @@ css
   width: 100%;
 }
 
+.library-form .password-toggle {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  padding: 8px;
+  color: #667085;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.library-form .password-toggle:hover {
+  color: #4f46e5;
+  background-color: #eef2ff;
+}
+
+.library-form .password-toggle mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
 .signup-container .terms {
   margin: 4px 0;
   color: #737b8c;

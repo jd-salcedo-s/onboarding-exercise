@@ -59,7 +59,6 @@ export class AuthService {
     }
 
     clearToken() {
-        // call logout API
         if (isPlatformBrowser(this.platformId)) {
             localStorage.removeItem('token')
         }

@@ -3,6 +3,7 @@ import { CardComponent } from "../../shared/card/card.component";
 import { ButtonComponent } from "../../shared/button/button.component";
 import { AuthService } from "../../core/auth.service";
 import { Router } from "@angular/router";
+import { getRoleFromToken } from "../../core/auth.guard";
 
 interface DashboardCard {
     icon: string
@@ -18,6 +19,9 @@ interface DashboardCard {
     styleUrl: './dashboard.css'
 })
 export class Dashboard {
+    username = localStorage.getItem('username')
+    role = getRoleFromToken()
+
     private authService = inject(AuthService)
     private router = inject(Router)
 
