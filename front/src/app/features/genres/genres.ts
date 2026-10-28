@@ -17,7 +17,7 @@ export class GenreComponent {
     error = signal('')
 
     columns: TableColumn[] = [
-        { key: 'description', label: 'Description' }
+        { key: 'description', label: 'Genre' }
     ]
     constructor() {
         afterNextRender(() => {

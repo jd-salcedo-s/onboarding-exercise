@@ -52,6 +52,18 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/clients/clients')
                         .then(m => m.ClientComponent)
+            },
+            {
+                path: 'staff',
+                loadComponent: () =>
+                    import('./features/staff/staff')
+                        .then(m => m.StaffComponent)
+            },
+            {
+                path: 'reservations',
+                loadComponent: () =>
+                    import('./features/reservations/reservations')
+                        .then(m => m.ReservationsComponent)
             }
         ]
     },

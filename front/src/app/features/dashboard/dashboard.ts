@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CardComponent } from "../../shared/card/card.component";
 import { ButtonComponent } from "../../shared/button/button.component";
+import { AuthService } from "../../core/auth.service";
+import { Router } from "@angular/router";
 
 interface DashboardCard {
     icon: string
@@ -16,6 +18,9 @@ interface DashboardCard {
     styleUrl: './dashboard.css'
 })
 export class Dashboard {
+    private authService = inject(AuthService)
+    private router = inject(Router)
+
     cards: DashboardCard[] = [
         {
             icon: 'menu_book',
@@ -50,6 +55,7 @@ export class Dashboard {
     ]
 
     onLogout() {
-        alert('Logout successfull')
+        this.authService.clearToken()
+        void this.router.navigate(['/login'])
     }
 }

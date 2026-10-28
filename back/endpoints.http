@@ -3,7 +3,7 @@
 
 ### RESERVATIONS
 GET {{baseUrl}}/reservation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoyLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODMwOTgsImV4cCI6MTc5MjgxMTg5OH0.u3ah-a1VWtSROMf64SKbheF3gFwVwAf4B9Y49OOJbZc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMxOTk5MDYsImV4cCI6MTc5MzIyODcwNn0._sN6KrsNk83bfuwSk_j3U7p1X_w5Q_Wi7dgohpQZQrY
 ### By id
 GET {{baseUrl}}/reservation/10
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
@@ -110,6 +110,7 @@ DELETE {{baseUrl}}/client/3
 
 ### GENRE
 GET {{baseUrl}}/genre
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMxOTk5MDYsImV4cCI6MTc5MzIyODcwNn0._sN6KrsNk83bfuwSk_j3U7p1X_w5Q_Wi7dgohpQZQrY
 ### By id
 GET {{baseUrl}}/genre/1
 ### create
@@ -131,7 +132,7 @@ DELETE {{baseUrl}}/genre/3
 
 ### STAFF
 GET {{staffUrl}}/staff
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoyLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTI3ODM1MzAsImV4cCI6MTc5MjgxMjMzMH0.it_PeKePNqPqIRvcusKqaZ3wHwsGwOqFx4Y9eNIqJyo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMxOTk5MDYsImV4cCI6MTc5MzIyODcwNn0._sN6KrsNk83bfuwSk_j3U7p1X_w5Q_Wi7dgohpQZQrY
 ### By id
 GET {{staffUrl}}/staff/1
 ### update
