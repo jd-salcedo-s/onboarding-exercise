@@ -4,24 +4,35 @@
 }
  
 .table-container {
-  overflow-x: hidden;
+  width: fit-content;
+  min-width: min(100%, 560px);
+  max-width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+  overflow: hidden;
   background: #ffffff;
-  border: 1px solid #e8eaf2;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(31, 41, 80, 0.06);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(31, 41, 80, 0.07);
 }
 
 .table-scroll {
+  width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
 }
 
 mat-paginator {
-  background: white;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
   border-top: 1px solid #e8eaf2;
 }
  
 table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   background: #ffffff;
 }
  
@@ -37,12 +48,25 @@ table {
  
 .mat-mdc-cell,
 .mat-mdc-header-cell {
-  padding: 16px 24px;
+  padding: 14px 20px;
   border-bottom-color: #e8eaf2;
+  white-space: nowrap;
 }
  
+.mat-mdc-header-cell {
+  letter-spacing: 0.02em;
+}
+
+.mat-mdc-row:last-child .mat-mdc-cell {
+  border-bottom: 0;
+}
+
 .mat-mdc-row:hover {
   background: #f8faff;
+}
+
+.mat-mdc-row {
+  transition: background-color 140ms ease;
 }
  
 .empty-message {
