@@ -1,0 +1,14 @@
+<main class="list-page">
+    <a routerLink="/dashboard"> Back to dashboard</a>
+
+    <h1>Clients</h1>
+    <p class="subtitle">View the clients in the Library.</p>
+
+    @if (loading()) {
+    <p role="status">Loading clients...</p>
+    } @else if (error()) {
+    <p role="alert">{{error()}}</p>
+    } @else {
+    <app-table [columns]="columns" [data]="clients()" />
+    }
+</main>

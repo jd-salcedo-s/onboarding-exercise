@@ -34,6 +34,24 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/books/books')
                         .then(m => m.BooksComponent)
+            },
+            {
+                path: 'authors',
+                loadComponent: () =>
+                    import('./features/authors/authors')
+                        .then(m => m.AuthorsComponent)
+            },
+            {
+                path: 'genres',
+                loadComponent: () =>
+                    import('./features/genres/genres')
+                        .then(m => m.GenreComponent)
+            },
+            {
+                path: 'clients',
+                loadComponent: () =>
+                    import('./features/clients/clients')
+                        .then(m => m.ClientComponent)
             }
         ]
     },

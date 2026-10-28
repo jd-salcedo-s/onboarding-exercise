@@ -1,7 +1,7 @@
 import { afterNextRender, Component, inject, signal } from "@angular/core";
 import { TableColumn, TableComponent } from "../../shared/table/table.component";
 import { RouterLink } from "@angular/router";
-import { Book, BookService } from "./book.service";
+import { Book, BookService } from "./books.service";
 
 @Component({
     selector: 'app-books',

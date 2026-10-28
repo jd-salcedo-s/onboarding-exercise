@@ -84,6 +84,7 @@ DELETE {{baseUrl}}/book/7
 
 ### CLIENT
 GET {{baseUrl}}/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMxOTk5MDYsImV4cCI6MTc5MzIyODcwNn0._sN6KrsNk83bfuwSk_j3U7p1X_w5Q_Wi7dgohpQZQrY
 ### By id
 GET {{baseUrl}}/client/1
 ### create
