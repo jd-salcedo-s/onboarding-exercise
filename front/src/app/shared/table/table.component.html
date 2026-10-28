@@ -1,3 +1,9 @@
+<div class="table-toolbar">
+    <button class="create-button" type="button" (click)="openCreate()">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        <span>Create {{ entityType }}</span>
+    </button>
+</div>
 <div class="table-container">
     <div class="table-scroll">
         <table mat-table [dataSource]="dataSource">
@@ -13,12 +19,24 @@
             </ng-container>
             }
 
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let row" class="action-buttons">
+                    <button type="button" aria-label="Update" (click)="openAction('update', row)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button type="button" aria-label="Delete" (click)="openAction('delete', row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
             <tr *matNoDataRow>
-                <td class="empty-message" [attr.colspan]="columns.length">
+                <td class="empty-message" [attr.colspan]="displayedColumns.length">
                     No records found.
                 </td>
             </tr>
@@ -27,3 +45,98 @@
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons
         aria-label="Table pagination" />
 </div>
+
+@if (activeAction) {
+<div class="modal-backdrop" (click)="closeAction()">
+    <div class="modal-dialog" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+        @if (activeAction === 'create') {
+        <app-form-container variant="modal" [title]="'Create ' + entityType">
+            <form class="action-form" (ngSubmit)="submitCreate()">
+                @for (field of createFields; track field.key) {
+                <label>
+                    <span>{{ field.label }}</span>
+                    @if (field.type === 'select') {
+                    <select [name]="field.key" [(ngModel)]="editValues[field.key]" [required]="field.required ?? false">
+                        <option [ngValue]="''" disabled>Select {{ field.label }}</option>
+                        @for (option of field.options; track option) {
+                        <option [ngValue]="option.value">{{ option.label }}</option>
+                        }
+                    </select>
+                    } @else if (field.type === 'checkbox') {
+                    <input [name]="field.key" type="checkbox" [(ngModel)]="editValues[field.key]" />
+                    } @else {
+                    <input [name]="field.key" [type]="field.type ?? 'text'" [attr.min]="field.min ?? null"
+                        [attr.step]="field.step ?? null" [required]="field.required ?? false"
+                        [(ngModel)]="editValues[field.key]" />
+                    }
+                </label>
+                }
+                @if (actionError) {
+                <p class="action-error" role="alert">{{ actionError }}</p>
+                }
+                <div class="modal-actions">
+                    <button type="button" (click)="closeAction()" [disabled]="actionLoading">Cancel</button>
+                    <button type="submit" [disabled]="actionLoading">
+                        {{ actionLoading ? 'Creating...' : 'Create' }}
+                    </button>
+                </div>
+            </form>
+        </app-form-container>
+        } @else if (activeAction === 'update' && activeRow) {
+        <app-form-container variant="modal" [title]="'Update ' + entityType">
+            <form class="action-form" (ngSubmit)="submitUpdate()">
+                @if (entityType === 'reservation') {
+                <div class="related-records">
+                    <p><strong>Client:</strong> {{ getCellValue(activeRow, 'client.name') ?? '-' }}</p>
+                    <p><strong>Staff:</strong> {{ getCellValue(activeRow, 'staff.name') ?? '-' }}</p>
+                </div>
+                }
+                @for (field of editFields; track field.key) {
+                <label>
+                    <span>{{ field.label }}</span>
+                    @if (field.type === 'select') {
+                    <select [name]="field.key" [(ngModel)]="editValues[field.key]">
+                        @for (option of field.options; track option) {
+                        <option [ngValue]="option.value">{{ option.label }}</option>
+                        }
+                    </select>
+                    } @else if (field.type === 'checkbox') {
+                    <input [name]="field.key" type="checkbox" [(ngModel)]="editValues[field.key]" />
+                    } @else {
+                    <input [name]="field.key" [type]="field.type ?? 'text'" [attr.min]="field.min ?? null"
+                        [attr.step]="field.step ?? null" [required]="field.required ?? false"
+                        [(ngModel)]="editValues[field.key]" />
+                    }
+                </label>
+                }
+                @if (actionError) {
+                <p class="action-error" role="alert">{{ actionError }}</p>
+                }
+                <div class="modal-actions">
+                    <button type="button" (click)="closeAction()" [disabled]="actionLoading">Cancel</button>
+                    <button type="submit" [disabled]="actionLoading">
+                        {{ actionLoading ? 'Updating...' : 'Update' }}
+                    </button>
+                </div>
+            </form>
+        </app-form-container>
+        } @else {
+        <app-form-container variant="modal" [title]="'Delete ' + entityType">
+            <p>Are you sure you want to delete this record?</p>
+            @if (actionError) {
+            <div class="action-error" role="alert">
+                <mat-icon aria-hidden="true">error_outline</mat-icon>
+                <span>{{ actionError }}</span>
+            </div>
+            }
+            <div class="modal-actions">
+                <button type="button" (click)="closeAction()" [disabled]="actionLoading">Cancel</button>
+                <button type="button" (click)="submitDelete()" [disabled]="actionLoading">
+                    {{ actionLoading ? 'Deleting...' : 'Delete' }}
+                </button>
+            </div>
+        </app-form-container>
+        }
+    </div>
+</div>
+}

@@ -8,4 +8,5 @@ import { Component, Input } from "@angular/core";
 })
 export class FormContainerComponent {
     @Input() title = ''
+    @Input() variant: 'page' | 'modal' = 'page'
 }

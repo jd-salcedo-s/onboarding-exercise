@@ -1,7 +1,17 @@
 import Reservation from "./reservation.model.ts";
+import ReservationBook from "./reservation_book.model.ts";
+import Book from "../book/book.model.ts";
+import sequelize from "../../config/database.ts";
 import type { ReservationCreate, ReservationUpdate } from "./reservation.types.ts";
 import { ReservationStateMachine } from "./reservation_state_machine.ts";
 import type { ReservationStatus } from "./reservation_status.ts";
+
+export class ReservationNotDeletableError extends Error {
+    constructor() {
+        super('Only expired or completed reservations can be deleted.')
+        this.name = 'ReservationNotDeletableError'
+    }
+}
 
 export class ReservationRepository {
     static async getAll() {
@@ -29,7 +39,7 @@ export class ReservationRepository {
         })
     }
 
-    static async getById(id: Number) {
+    static async getById(id: number) {
         const reservation = await Reservation.findOne({
             where: { id },
             include: [
@@ -76,7 +86,7 @@ export class ReservationRepository {
         return created_reservation
     }
 
-    static async update(id: Number, data: ReservationUpdate) {
+    static async update(id: number, data: ReservationUpdate) {
         const update_data: {
             reservation_status?: ReservationStatus
         } = {}
@@ -97,14 +107,48 @@ export class ReservationRepository {
         return updated_reservation_count
     }
 
-    static async delete(id: Number) { // TODO: solo eliminar si el status en 'completed'. O no es necesario
-        return await Reservation.destroy({
-            where: { id }
+    static async delete(id: number) {
+        return await sequelize.transaction(async transaction => {
+            const reservation = await Reservation.findByPk(id, {
+                transaction,
+                lock: transaction.LOCK.UPDATE
+            })
+
+            if (!reservation) return 0
+
+            const status = reservation.get('reservation_status')
+            if (status !== 'expired' && status !== 'completed') {
+                throw new ReservationNotDeletableError()
+            }
+
+            const reservationBooks = await ReservationBook.findAll({
+                where: { reservation_id: id },
+                attributes: ['book_id'],
+                transaction
+            })
+            const bookIds = reservationBooks.map(item => item.get('book_id') as number)
+
+            await ReservationBook.destroy({
+                where: { reservation_id: id },
+                transaction
+            })
+
+            if (bookIds.length > 0) {
+                await Book.update(
+                    { is_booked: false },
+                    { where: { id: bookIds }, transaction }
+                )
+            }
+
+            return await Reservation.destroy({
+                where: { id },
+                transaction
+            })
         })
     }
 
     // actualiza el reservation_status con la maquina de estados  
-    static async updateStatus(id: Number, nextStatus: ReservationStatus) {
+    static async updateStatus(id: number, nextStatus: ReservationStatus) {
         const reservation = await this.getById(id)
 
         if (!reservation) {
@@ -115,7 +159,7 @@ export class ReservationRepository {
         ReservationStateMachine.validateTransition(current_status, nextStatus)
     }
 
-    static async clientReservations(id: Number) {
+    static async clientReservations(id: number) {
         const reservations = await Reservation.count({
             where: { client_id: id }
         })
@@ -123,7 +167,7 @@ export class ReservationRepository {
         return reservations
     }
 
-    static async staffReservations(id: Number) {
+    static async staffReservations(id: number) {
         const reservations = await Reservation.count({
             where: { staff_id: id }
         })

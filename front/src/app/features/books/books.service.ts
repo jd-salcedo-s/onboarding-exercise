@@ -5,6 +5,8 @@ import { AuthService } from "../../core/auth.service";
 
 export interface Book {
     id: number
+    author_id: number
+    genre_id: number
     title: string
     publish_date: string
     is_booked: boolean

@@ -20,6 +20,7 @@ export class BooksComponent {
         { key: 'title', label: 'Title' },
         { key: 'author.name', label: 'Author' },
         { key: 'publish_date', label: 'Publish Date' },
+        { key: 'is_booked', label: 'Booked' }
     ]
     constructor() {
         afterNextRender(() => {

@@ -9,6 +9,17 @@
     } @else if (error()) {
     <p role="alert">{{error()}}</p>
     } @else {
-    <app-table [columns]="columns" [data]="books()" />
+    <app-table [columns]="columns" [data]="books()" entityType="book" />
     }
 </main>
+
+<div style="display: flex; flex-direction: row;">
+    <div>
+        <button></button>
+        <h1></h1>
+        <p></p>
+    </div>
+    <div>
+        <table></table>
+    </div>
+</div>

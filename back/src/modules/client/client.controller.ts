@@ -110,7 +110,7 @@ export class ClientController {
                 message: "Client not found"
             })
 
-            return res.sendStatus(200)
+            return res.sendStatus(204)
         } catch {
             return res.status(500).json({
                 message: "Internal server error"

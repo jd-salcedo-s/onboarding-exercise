@@ -94,13 +94,19 @@ export class AuthorController {
             message: "Invalid id param"
         })
         try {
+            const books = await AuthorRepository.countBooks(id)
+
+            if (books > 0) return res.status(409).json({
+                message: "Author has associated books"
+            })
+
             const success = await AuthorRepository.delete(id)
 
             if (success === 0) return res.status(404).json({
                 message: "Author not found"
             })
 
-            return res.sendStatus(200)
+            return res.sendStatus(204)
         } catch {
             return res.status(500).json({
                 message: "Internal server error"

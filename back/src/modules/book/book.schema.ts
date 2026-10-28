@@ -13,6 +13,5 @@ export const bookUpdateSchema = Joi.object({
     author_id: Joi.number().positive().integer().optional(),
     genre_id: Joi.number().positive().integer().optional(),
     title: Joi.string().max(255).optional(),
-    publish_date: Joi.date().optional(),
-    is_booked: Joi.boolean().optional()
+    publish_date: Joi.date().optional()
 })

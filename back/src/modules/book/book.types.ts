@@ -8,4 +8,4 @@ export type Book = {
 }
 
 export type BookCreate = Omit<Book, 'id' | 'is_booked'>
-export type BookUpdate = Partial<Omit<Book, 'id'>>
+export type BookUpdate = Partial<Omit<Book, 'id' | 'is_booked'>>

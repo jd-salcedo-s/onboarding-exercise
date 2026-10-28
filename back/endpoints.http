@@ -3,7 +3,7 @@
 
 ### RESERVATIONS
 GET {{baseUrl}}/reservation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMxOTk5MDYsImV4cCI6MTc5MzIyODcwNn0._sN6KrsNk83bfuwSk_j3U7p1X_w5Q_Wi7dgohpQZQrY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMyMTk2MDEsImV4cCI6MTc5MzI0ODQwMX0.ZEmPmhXyJqEZr01GeQAsu-wX7sbPLKz8qMwurL16J9c
 ### By id
 GET {{baseUrl}}/reservation/10
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
@@ -53,7 +53,7 @@ DELETE {{baseUrl}}/author/6
 
 ### BOOK
 GET {{baseUrl}}/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjoxLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3OTI3ODM2ODMsImV4cCI6MTc5MjgxMjQ4M30.wmtlfHJHMn8i5Ba-O9VkYRIr_rxDekOsxYjheUGA2Zc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGFmZklkIjozLCJyb2xlIjoic3RhZmYiLCJpYXQiOjE3OTMyMTk2MDEsImV4cCI6MTc5MzI0ODQwMX0.ZEmPmhXyJqEZr01GeQAsu-wX7sbPLKz8qMwurL16J9c
 ### By id
 GET {{baseUrl}}/book/1
 ### create

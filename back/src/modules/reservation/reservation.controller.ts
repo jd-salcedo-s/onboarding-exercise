@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { ReservationRepository } from "./reservation.repository.ts";
+import { ReservationNotDeletableError, ReservationRepository } from "./reservation.repository.ts";
 import { reservationCreateSchema, reservationIdSchema, reservationUpdateSchema } from "./reservation.schema.ts";
 import { BookRepository } from "../book/book.repository.ts";
 import ReservationBook from "./reservation_book.model.ts";
@@ -158,8 +158,12 @@ export class ReservationController {
                 message: "Reservation not found"
             })
 
-            return res.sendStatus(200)
-        } catch {
+            return res.sendStatus(204)
+        } catch (error) {
+            if (error instanceof ReservationNotDeletableError) return res.status(400).json({
+                message: error.message
+            })
+
             return res.status(500).json({
                 message: "Internal server error"
             })

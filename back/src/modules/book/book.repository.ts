@@ -1,5 +1,7 @@
 import { Op } from "sequelize";
 import Book from "./book.model.ts";
+import ReservationBook from "../reservation/reservation_book.model.ts";
+import sequelize from "../../config/database.ts";
 import type { BookCreate, BookUpdate } from "./book.types.ts";
 
 export class BookRepository {
@@ -10,10 +12,7 @@ export class BookRepository {
                     association: 'author',
                     attributes: ["name"],
                 }
-            ],
-            attributes: {
-                exclude: ["author_id", "genre_id"]
-            }
+            ]
         })
     }
 
@@ -61,8 +60,7 @@ export class BookRepository {
             author_id: data.author_id,
             genre_id: data.genre_id,
             title: data.title,
-            publish_date: data.publish_date,
-            is_booked: data.is_booked
+            publish_date: data.publish_date
         },
             { where: { id } }
         )
@@ -71,8 +69,16 @@ export class BookRepository {
     }
 
     static async delete(id: Number) {
-        return await Book.destroy({
-            where: { id }
+        return await sequelize.transaction(async transaction => {
+            await ReservationBook.destroy({
+                where: { book_id: id },
+                transaction
+            })
+
+            return await Book.destroy({
+                where: { id },
+                transaction
+            })
         })
     }
 

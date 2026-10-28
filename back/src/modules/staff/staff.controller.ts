@@ -106,14 +106,14 @@ export class StaffController {
             if (updateBody.username === staff.get('username')) {
                 updateData = {
                     name: updateBody.name,
-                    password: await hashPassword(updateBody.password),
-                    role: updateBody.Role
+                    ...(updateBody.password ? { password: await hashPassword(updateBody.password) } : {}),
+                    role: updateBody.role
                 }
 
             } else {
                 updateData = {
                     ...updateBody,
-                    password: await hashPassword(updateBody.password)
+                    ...(updateBody.password ? { password: await hashPassword(updateBody.password) } : {})
                 }
             }
 
@@ -151,7 +151,7 @@ export class StaffController {
                 message: "Staff member not found"
             })
 
-            return res.sendStatus(200)
+            return res.sendStatus(204)
         } catch {
             return res.status(500).json({
                 message: "Internal server error"

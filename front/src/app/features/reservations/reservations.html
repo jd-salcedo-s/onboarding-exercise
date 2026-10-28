@@ -9,6 +9,6 @@
     } @else if (error()) {
     <p role="alert">{{error()}}</p>
     } @else {
-    <app-table [columns]="columns" [data]="reservations()" />
+    <app-table [columns]="columns" [data]="reservations()" entityType="reservation" />
     }
 </main>
