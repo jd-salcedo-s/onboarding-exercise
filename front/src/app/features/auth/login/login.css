@@ -10,83 +10,6 @@ css
   font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
 }
 
-.login-container {
-  width: 100%;
-  max-width: auto;
-  padding: 40px;
-  box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #e8eaf2;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(31, 41, 80, 0.10);
-}
-
-.login-container h2 {
-  margin: 0 0 10px;
-  color: #172033;
-  font-size: 30px;
-  font-weight: 750;
-  letter-spacing: -0.8px;
-  text-align: center;
-}
-
-.login-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.login-container mat-form-field {
-  width: 100%;
-}
-
-.library-form .password-toggle {
-  width: 40px;
-  height: 40px;
-  margin-right: 8px;
-  padding: 8px;
-  color: #667085;
-  border-radius: 10px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.library-form .password-toggle:hover {
-  color: #4f46e5;
-  background-color: #eef2ff;
-}
-
-.library-form .password-toggle mat-icon {
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-}
-
-.login-container .form-options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 12px;
-  font-size: 13px;
-}
-
-.login-container a {
-  color: #4f46e5;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.login-container a:hover {
-  text-decoration: underline;
-}
-
-.login-container .bottom-text {
-  margin: 26px 0 0;
-  font-size: 14px;
-  text-align: center;
-}
-
 .form-error {
   margin: 0;
   padding: 12px 16px;
@@ -101,14 +24,5 @@ css
 @media (max-width: 480px) {
   :host {
     padding: 20px 14px;
-  }
-
-  .login-container {
-    padding: 28px 22px;
-    border-radius: 16px;
-  }
-
-  .login-container h2 {
-    font-size: 26px;
   }
 }

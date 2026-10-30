@@ -14,20 +14,6 @@
   font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
 }
 
-:host(.modal-form) {
-  display: block;
-  min-height: 0;
-  padding: 0;
-  background: transparent;
-}
-
-.modal-form {
-  max-width: none;
-  padding: 28px;
-  border-radius: 16px;
-  box-shadow: none;
-}
-
 .modal-form h2 {
   font-size: 24px;
 }

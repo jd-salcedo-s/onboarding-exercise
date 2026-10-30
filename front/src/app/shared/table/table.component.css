@@ -4,7 +4,7 @@
 }
  
 .table-container {
-  width: fit-content;
+  width: 100%;
   min-width: min(100%, 560px);
   max-width: 100%;
   margin-inline: auto;
@@ -19,10 +19,10 @@
 .table-toolbar {
   display: flex;
   justify-content: flex-end;
-  width: fit-content;
+  width: 100%;
   min-width: min(100%, 560px);
   max-width: 100%;
-  margin: 0 auto 12px;
+  margin: 12px auto 0;
   box-sizing: border-box;
 }
 
@@ -62,8 +62,10 @@
 
 .table-scroll {
   width: 100%;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  max-height: calc(100vh - 280px);
+  max-height: calc(100dvh - 280px);
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 mat-paginator {
@@ -131,10 +133,6 @@ table {
   min-height: 0;
   padding: 20px;
   background: transparent;
-}
-
-.modal-dialog :host {
-  min-height: 0;
 }
 
 .action-form {

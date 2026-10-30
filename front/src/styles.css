@@ -24,15 +24,6 @@ body {
   width: 100%;
 }
  
-.library-form .form-options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 12px;
-  font-size: 13px;
-}
- 
 .library-form a {
   color: #4f46e5;
   font-weight: 600;
@@ -50,11 +41,25 @@ body {
   text-align: center;
 }
  
-.library-form .terms {
-  margin: 4px 0;
-  color: #737b8c;
-  font-size: 12px;
-  line-height: 1.7;
+.library-form .password-toggle {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  padding: 8px;
+  color: #667085;
+  border-radius: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.library-form .password-toggle:hover {
+  color: #4f46e5;
+  background-color: #eef2ff;
+}
+
+.library-form .password-toggle mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }
  
 .list-page {
@@ -70,16 +75,38 @@ body {
   font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
   color: #172033;
 }
+
+.list-page app-table {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+}
  
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  margin-bottom: 16px;
+}
+
+.list-heading {
+  min-width: 0;
+}
+
 .list-page h1 {
-  margin: 24px 0 10px;
+  margin: 0 0 8px;
   font-size: 30px;
   font-weight: 750;
   letter-spacing: -0.8px;
 }
  
 .list-page .subtitle {
-  margin: 0 0 28px;
+  margin: 0;
   color: #737b8c;
 }
  
@@ -125,6 +152,11 @@ body {
  
 @media (max-width: 600px) {
   .list-page {
-    padding: 24px 16px;
+    padding: 28px 16px;
+  }
+
+  .list-header {
+    align-items: flex-start;
+    gap: 12px;
   }
 }
